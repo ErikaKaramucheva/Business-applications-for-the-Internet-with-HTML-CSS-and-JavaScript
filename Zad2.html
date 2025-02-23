@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>Задача 2</title>
+	<style>
+	body{
+		background-color:deeppink;
+		text-align: center;
+		font-size: 20px;
+	}
+	</style>
+	<script language="javascript">
+		function calculate(form,event){
+			event.preventDefault();
+			var first=form.first.value;
+			var second=form.second.value;
+			var third=form.third.value;
+			var fourth=form.fourth.value;
+			var min=Math.min(first,second,third,fourth);
+			var max=Math.max(first,second,third,fourth);
+			var avg=(parseFloat(first)+parseFloat(second)+parseFloat(third)+parseFloat(fourth))/4;
+			
+			
+			document.getElementById('result').innerHTML="<h3>Минималната печалба е: "+min+"</h3><h3>Максималната печалба е: "+max+"</h3><h3>Средната печалба е: "+avg+"</h3>";
+			
+		
+		}
+
+	</script>
+</head>
+<body >
+<h1>Задача 2</h1>
+<form  name="f1" onsubmit=" return calculate(document.f1,event)" method="post">
+        <h5>Въведете печалбата за първото тримесечие: 
+        <input type="text" name="first" size="13" /></h5>
+        <h5>Въведете печалбата за второто тримесечие:
+        <input type="text" name="second" size="13" /></h5>
+        <h5>Въведете печалбата за третото тримесечие: 
+        <input type="text" name="third" size="13"/></h5>
+        <h5>Въведете печалбата за четвъртото тримесечие: 
+        <input type="text" name="fourth" size="13"/></h5>
+        <input type="submit" name="submit" value="Потвърдете"  />
+    </form>
+   <h3 id="result">
+   </h3>
+     
+	</body>
+</html>

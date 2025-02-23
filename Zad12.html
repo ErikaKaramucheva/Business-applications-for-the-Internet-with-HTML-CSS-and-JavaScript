@@ -1,0 +1,149 @@
+<HTML> <HEAD>
+  <meta charset="utf-8">
+<META HTTP-EQUIV="Content-Type" CONTENT = "text/html;charset = windows-1251">
+<TITLE> Хотел </TITLE>
+<SCRIPT LANGUAGE = "JavaScript" >
+var i1 = 0 , i2 = 0, s=0, brn=0, z=0
+
+function validEmail ( email )
+{
+invalidChars = " /:,;"
+if ( email == "" ) return false
+for ( i = 0 ; i < invalidChars.length ; i++ )
+{
+badChar = invalidChars.charAt(i)
+if ( email.indexOf ( badChar ) > -1 ) return false
+}
+atPos = email.indexOf ( "@" )
+if ( atPos == -1 ) return false
+podniz = email.substring ( atPos+1 , email.length )
+if ( podniz.indexOf ( "@" ) != -1 ) return false
+periodPos = podniz.lastIndexOf ( "." )
+if ( periodPos == -1 ) return false
+if ( periodPos+3 > email.length ) return false
+alert("Е-mail-адресът е OK")
+return true
+}
+
+function validName ( passedVal )
+{
+var c = passedVal.charAt(0)
+if ( passedVal == "" ) return false
+if ( c < "А" || c > "Я" ) return false
+for ( i = 0 ; i < passedVal.length ; i++ )
+{
+c = passedVal.charAt(i)
+if ( c != ' ' && c < "А" ) return false
+if ( c > "я" ) return false
+}
+alert("Името е OK")
+return true
+}
+
+function izbor1 ( menu1 )
+{ i1 = menu1.selectedIndex } // число от 0 до 3 за брой нощувки
+
+function izbor2 ( menu2 )
+{ i2 = menu2.selectedIndex } // число от 0 до 2 за цена на една нощувка
+
+function submitIt ( f )
+{
+if ( !validName ( f.T1.value ) )
+{
+alert("Невалидно име!")
+f.T1.focus()
+f.T1.select()
+return false
+}
+if ( !validEmail ( f.T2.value ) )
+{
+alert("Невалиден email-адрес!")
+f.T2.focus()
+f.T2.select()
+return false
+}
+switch(i1)
+ {
+   case 0: brn=3; break
+   case 1: brn=5; break
+   case 2: brn=7; break
+   case 3: brn=30;
+ }
+switch(i2)
+ {
+   case 0: z=100; break
+   case 1: z=180; break
+   case 2: z=250;
+ }
+s+= brn * z
+if ( f.elements[2].checked)
+  alert("Плащане в брой")
+else
+if ( f.elements[3].checked)
+  alert("Плащане в с карта")
+else
+  alert("Плащане по банков път")
+
+if ( f.elements[5].checked)
+{  alert("Вечеря");   s+= brn * 25 }
+
+if ( f.elements[6].checked)
+{   alert("СПА");   s+= 40 }
+
+if ( f.elements[7].checked)
+{   alert("Екскурзия");   s+= 60 }
+
+alert("OK! Сума за плащане: "+ s)
+return true
+}
+document.write("<P ALIGN = Right><I>" + Date() + "<\/P> <\/I>" )
+</SCRIPT>
+</HEAD>
+<BODY bgcolor=lightgreen>
+<H2> Хотел "РАЙ" Пампорово </H2>
+<H3> ЗАЯВКА ЗА НОЩУВКИ </H3>
+<FORM NAME = "F1" onSubmit = "return submitIt(document.F1)" >
+
+Задайте името си (на кирилица):
+<INPUT TYPE = "Text" NAME = "T1" SIZE = 40 > <P>
+Задайте e-mail-адреса си:
+<INPUT TYPE = "Text" NAME = "T2" SIZE = 31 > <P>
+
+Задайте форма на плащане:
+<INPUT TYPE = "Radio" NAME = "R1" VALUE = "Кеш" CHECKED > В брой &nbsp;
+<INPUT TYPE = "Radio" NAME = "R1" VALUE = "Карта" > С карта &nbsp;
+<INPUT TYPE = "Radio" NAME = "R1" VALUE = "Банка" > По банков път <P>
+
+Изберете услуги: <BR>
+<INPUT TYPE = "Checkbox" NAME = "C1" VALUE = "Вечеря" CHECKED > Вечеря (+25 лв на ден) <BR>
+<INPUT TYPE = "Checkbox" NAME = "C2" VALUE = "СПА" > СПА (+40 лева) <BR>
+<INPUT TYPE = "Checkbox" NAME = "C3" VALUE = "Екскурзия" > Екскурзия (+60 лева) <P>
+
+Изберете брой нощувки: <BR>
+<SELECT NAME = "S1" onChange = "izbor1(this.form.S1)" >
+<OPTION VALUE = "3 нощувки" SELECTED > 3 нощувки </OPTION >
+<OPTION VALUE = "5 нощувки"> 5 нощувки </OPTION >
+<OPTION VALUE = "7 нощувки"> 7 нощувки </OPTION >
+<OPTION VALUE = "30 нощувки"> 30 нощувки </OPTION >
+</SELECT> <P>
+
+Цена за една нощувка: <BR>
+<TEXTAREA NAME = "TA1" COLS = 30 ROWS = 4 >
+Единична стая: 100 лева
+Стая с две легла: 180 лева
+Апартамент: 250 лева
+</TEXTAREA> <P>
+
+Изберете: <BR>
+<SELECT NAME = "S2" onChange = "izbor2(this.form.S2)" >
+<OPTION VALUE = "Единична стая"  > Единична стая </OPTION >
+<OPTION VALUE = "Стая с две легла" SELECTED> Стая с две легла </OPTION >
+<OPTION VALUE = "Апартамент" > Апартамент </OPTION >
+</SELECT> <P>
+
+<TEXTAREA NAME = "TA2" COLS = 60 ROWS = 4 >
+Ако желаете, задайте тук въпроси:
+</TEXTAREA> <P>
+<INPUT TYPE = "Submit" NAME = "B1" VALUE = "Submit" > &nbsp;
+<INPUT TYPE = "Reset" NAME = "B2" VALUE = "Reset" >
+</FORM>  </BODY>  </HTML>

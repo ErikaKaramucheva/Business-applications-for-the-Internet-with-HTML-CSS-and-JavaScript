@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>Задача 3</title>
+	<style>
+	body{
+		background-color:yellowgreen;
+		text-align: center;
+		font-size: 20px;
+	}
+	</style>
+	<script language="javascript">
+		function calculateAvgSpeed(form,event){
+
+			event.preventDefault();
+			var km=form.km.value;
+			var departureHour=form.depHour.value;
+			var departureMinute=form.depMin.value;
+			var arrivalHour=form.arrivalHour.value;
+			var arrivalMinute=form.arrivalMin.value;
+
+			if(!checkHour(departureHour) || !checkHour(arrivalHour)
+			|| !checkMinute(arrivalMinute) || !checkMinute(departureMinute) || !checkKm(km)){
+				console.log("I'm here");
+				return false;
+			}else{
+
+			var hour=parseInt(arrivalHour)-parseInt(departureHour)-1;
+			var min=0;
+			if(arrivalMinute>departureMinute){
+				min=parseInt(arrivalMinute)-parseInt(departureMinute);
+			}else{
+				min=min+(60-parseInt(departureMinute)+parseInt(arrivalMinute));
+		}
+			//s=v*t -> v=s/t
+			if(min>60){
+				hour++;
+				min-=60;
+			}
+			var v=parseFloat(km)/(parseInt(hour)+(parseFloat(min)/60));
+			
+			
+			document.getElementById('result').innerHTML="<h3>Необходимата средна скорост е: "+Math.round(v);
+		}
+	}
+		function checkHour(hour){
+			if(hour<0 || hour>23){
+				document.getElementById('result').innerHTML="<h3> Моля, въведете коректен час между 0 и 23.</h3>";
+				return false;
+			}
+			return true;
+		}
+		function checkMinute(min){
+			if(min<0 || min>60){
+				document.getElementById('error').innerHTML="<h3> Моля, въведете коректени минути между 0 и 59.</h3>";
+				console.log("still here");
+				return false;
+			}
+			return true;
+		}
+		function checkKm(km){
+			if(km<0){
+				document.getElementById('error').innerHTML="<h3> Моля, въведете коректна стойност за километрите!</h3>";
+				return false
+			}
+			return true;
+		}
+		
+
+	</script>
+</head>
+<body >
+<h1>Задача 3</h1>
+<form  name="f1" onsubmit=" return calculateAvgSpeed(document.f1,event)" method="post">
+        <h5>Въведете път за изминаване от транспортното средство в км.: 
+        <input type="number" name="km" /></h5>
+        <h5>Въведете часа на тръгване:
+        <input type="number" name="depHour" /></h5>
+        <h5>Въведете минутите на тръгване: 
+        <input type="nmber" name="depMin" /></h5>
+        <h5>Въведете часа на пристигане: 
+        <input type="number" name="arrivalHour" /></h5>
+        <h5>Въведете минутите на пристигане: 
+        <input type="number" name="arrivalMin" /></h5>
+        <input type="submit" name="submit" value="Потвърдете"  />
+    </form>
+   <h3 id="result">
+   </h3>
+   <h3 id="error"></h3>
+     
+	</body>
+</html>

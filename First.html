@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>Задача 1</title>
+	<style>
+	body{
+		background-color:skyblue;
+		text-align: center;
+		font-size: 20px;
+	}
+	</style>
+	<script language="javascript">
+		function productNameWrite(form){
+			var productName=form.productName.value;
+			var unitPrice=form.unitPrice.value;
+			var quantity=form.quantity.value;
+			var dds=form.DDS.value;
+			var sum=(quantity*unitPrice)+((quantity*unitPrice)*(dds/100));
+			document.write("<body bgcolor=skyblue >")
+		document.write("<table  border=4 bordercolor=black cellspacing=0 width=50%>")
+        document.write("<caption > <b> <big> Изчисляване на ДДС </big> </b> </caption>")
+        document.write("<tr > <th> Име на стоката <th> " + productName + "</tr>")
+        document.write("<tr > <th> Ед. цена <th> " + unitPrice + "</tr>")
+        document.write("<tr > <th> Количество <th> " + quantity + "</tr>")
+        document.write("<tr > <th> ДДС в % <th> " + dds + "</tr>")
+        document.write("<tr > <th> Обща сума с ДДС <th> " + Math.round(sum,2) + "</tr>")
+        document.write("</table")
+        document.write("</body>")
+		}
+
+	</script>
+</head>
+<body >
+<h1>Задача 1</h1>
+<form  name="f1" onsubmit=" return productNameWrite(document.f1)" method="post">
+        <h5>Задайте име на стоката: 
+        <input type="text" name="productName" size="44" /></h5>
+        <h5>Задайте единична цена на стоката:
+        <input type="text" name="unitPrice" size="6" /></h5>
+        <h5>Задайте количеството на стоката: 
+        <input type="text" name="quantity" size="13"/></h5>
+        <h5>Задайте ДДС в момента в %: 
+        <input type="text" name="DDS" size="44"/></h5>
+        <input type="submit" name="submit" value="Потвърдете"  />
+    </form>
+   
+     
+	</body>
+</html>

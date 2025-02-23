@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>Задача 7</title>
+	<style>
+	body{
+		background-color: lightyellow;
+		text-align: center;
+		font-size: 20px;
+	}
+	</style>
+	
+	<script >
+  
+		function calculate(form,event){
+			event.preventDefault();
+			var sum=form.sum.value;
+			var month=form.month.value;
+			var percent=0.0;
+			var days=0.0;
+			if(sum<100){
+				document.getElementById('result').innerHTML="<h3> Моля, въведете коректни стойности за сума. Тя трябва да бъде над 100 лева.</h3>";
+				return;
+			}
+			if(month!=3 && month!=6){
+			document.getElementById('result').innerHTML="<h3> Моля, въведете коректни стойности за месец. Изберете 3 или 6.</h3>";
+			}else{
+				switch(month){
+					case "3": 
+					days=90/360;
+					if(sum>100 &&sum<=1000){
+						percent=1.53;
+
+					}else if(sum>=1000.01&& sum<=3000){
+						percent=2.22;
+					}else{
+						percent=3.15;
+					}
+					break;
+					case "6": 
+					days=180/360;
+					if(sum>100 &&sum<=1000){
+						percent=2.54;
+
+					}else if(sum>=1000.01&& sum<=3000){
+						percent=3.33;
+					}else{
+						percent=4.35;
+					}
+				}
+
+			
+			var url = 'banka.htm?param1=' + encodeURIComponent(sum) + '&param2=' + encodeURIComponent(month)+ '&param3=' + encodeURIComponent(result);
+			window.open(url,"win1","top=100, left=530,width=340,height=220,status=yes")
+		}
+		}
+
+	</script>
+</head>
+<body >
+<h1>Задача 7</h1>
+<form  name="f1" onsubmit=" return calculate(document.f1,event)" method="post">
+        <h5>Въведете начална сума: 
+        <input type="number" name="sum" /></h5>
+        <h5>Въведете период в месеци (3 или 6 месеца):
+        <input type="number" name="month" min="3" max="6"/></h5>
+      
+        <input type="submit" name="submit" value="Потвърдете"  />
+    </form>
+   <h3 id="result">
+   </h3>
+     
+	</body>
+</html>

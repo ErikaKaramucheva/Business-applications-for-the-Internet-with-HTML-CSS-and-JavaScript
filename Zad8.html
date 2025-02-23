@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>Задача 8</title>
+	<style>
+	body{
+		background-color:deeppink;
+		text-align: center;
+		font-size: 20px;
+	}
+	</style>
+	<script language="javascript">
+		function calculate(form,event){
+			event.preventDefault();
+
+			var start=parseFloat(form.start.value);
+			var final=parseFloat(form.final.value);
+			var interest=parseFloat(form.interest.value);
+			var years=0;
+			var n= ((final-start)/start)*(100/interest);
+			if(n>=1.2){
+				years=parseInt(n);
+				n=(n-(years*1.2));
+				if(n<0){
+					return;
+					n=0;
+				}
+					n *= 10;
+   				 var formattedMonths = n < 10 ?  Math.floor(n) : Math.floor(n);
+
+				document.getElementById('result').innerHTML="<h3>Началната сума ще надвиши крайната след: "+years+" години и "+formattedMonths+" месеца.</h3>";
+			}else{
+			document.getElementById('result').innerHTML="<h3>Началната сума ще надвиши крайната след: "+n*10+" месеца.</h3>";
+		}
+
+		}
+
+	</script>
+</head>
+<body >
+<h1>Задача 8</h1>
+<form  name="f1" onsubmit=" return calculate(document.f1,event)" method="post">
+        <h5>Въведете начална сума: 
+        <input type="number" name="start" /></h5>
+        <h5>Въведете крайна сума:
+        <input type="number" name="final"/></h5>
+        <h5>Въведете лихва: 
+        <input type="number" name="interest" /></h5>
+        <input type="submit" name="submit" value="Потвърдете"  />
+    </form>
+   <h3 id="result">
+   </h3>
+     
+	</body>
+</html>

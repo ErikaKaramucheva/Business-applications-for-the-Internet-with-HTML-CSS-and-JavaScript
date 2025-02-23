@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 19</title>
+    <style>
+	body{
+		background-color:lightcyan;
+		text-align: center;
+		font-size: 20px;
+	}
+</style>
+</head>
+<body>
+
+<h2><em>Задача 19</em></h2>
+<h3>Изберете категория:</h3>
+<p>
+    <input type="radio" name="catRadio" value="1" checked="true">Ръководна длъжност</input>
+    <input type="radio" name="catRadio" value="2">Сътрудник</input>
+    <input type="radio" name="catRadio" value="3">Специалист</input>
+    <input type="radio" name="catRadio" value="4">Друга категория</input>
+</p>
+<hr>
+<h3>Стаж в навършени години:</h3>
+<p>
+    <input type="radio" name="intRadio" value="4" checked="true">0- 5 години длъжност</input>
+    <input type="radio" name="intRadio" value="7">6- 12 години</input>
+    <input type="radio" name="intRadio" value="11">13- 22 години</input>
+    <input type="radio" name="intRadio" value="16">Над 22 години</input>
+</p>
+<button onclick="calculate()">Изчисли:</button>
+<div >
+    <h3 id="result"></h3>
+</div>
+
+<script>
+    function calculate() {
+        var category=document.querySelector('input[name="catRadio"]:checked').value;
+        var years=document.querySelector('input[name="intRadio"]:checked').value;
+        var sumWithoutTaxes=0;
+        if(category==1){
+            sumWithoutTaxes+=1000;
+        }else if(category==2){
+            sumWithoutTaxes+=600;
+        }else if(category==3){
+            sumWithoutTaxes+=750;
+        }else{
+            sumWithoutTaxes+=500;
+        }
+
+        if(years==4){
+            sumWithoutTaxes=(sumWithoutTaxes*0.04)+sumWithoutTaxes;
+        }else if(years==7){
+            sumWithoutTaxes=(sumWithoutTaxes*0.07)+sumWithoutTaxes;
+        }else if(years==11){
+            sumWithoutTaxes=(sumWithoutTaxes*0.11)+sumWithoutTaxes;
+        }else{
+            sumWithoutTaxes=(sumWithoutTaxes*0.16)+sumWithoutTaxes;
+        }
+        var sum=sumWithoutTaxes-(sumWithoutTaxes*0.15);
+        document.getElementById('result').innerHTML="<hr><h3> Заплата без удръжки: "+sumWithoutTaxes+". Заплата с удръжки 10% плосък данък и 5% за здравно осигуряване: "+Math.floor(sum)+"</h3>";
+        
+    }
+</script>
+
+</body>
+</html>
